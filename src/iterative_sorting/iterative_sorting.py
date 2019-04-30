@@ -1,3 +1,4 @@
+import random
 # TO-DO: Complete the selection_sort() function below 
 def insertion_sort( arr ):
     # loop through n-1 elements
@@ -45,9 +46,6 @@ def bubble_sort( arr ):
 
     return arr    
 
-list = [1, 2, 3, 4, 5]
-print(bubble_sort(list))
-
 def selection_sort2( arr ):
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
@@ -72,6 +70,36 @@ def bubble_sort2( arr ):
                 arr[j], arr[j+1] = arr[j+1], arr[j]
 
     return arr
+
+# quick sort
+def quick_sort(arr, low, high):
+    if low >= high:
+        return arr
+    
+    else:
+        pivot_index = low
+
+        for i in range(low, high):
+
+            if arr[i] < arr[pivot_index]:
+                temp = arr[pivot_index+1]
+                arr[pivot_index+1] = arr[i]
+                arr[i] = temp
+
+                temp = arr[pivot_index]
+                arr[pivot_index] = arr[pivot_index+1]
+                arr[pivot_index+1] = temp
+                pivot_index += 1
+
+    arr = quick_sort(arr, low, pivot_index)
+
+    arr = quick_sort(arr, pivot_index+1, high)
+    
+    return arr
+
+l = [random.randint(0,1000) for i in range(0,100)]
+quick_sort(l, 0, len(l))
+print(l)
 
 # STRETCH: implement the Count Sort function below
 def count_sort( arr, maximum=-1 ):
